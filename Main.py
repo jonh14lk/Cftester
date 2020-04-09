@@ -36,8 +36,8 @@ for i in range(q):
     In = In.replace('<br>','\n')
     In = In.replace('< br>','\n')
     In = In.split('\n')
-    pathe = '/Área de Trabalho/Cftester/' + str(inde) + '.in'
-    f = open(home + pathe , 'w')
+    pathe = '/home/joao/Área de Trabalho/Cftester/' + str(inde) + '.in'
+    f = open(pathe , 'w')
     for j in In:
       y = j.replace('\n', '')
       if(y != '' and y != ' '):
