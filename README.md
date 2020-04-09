@@ -3,12 +3,10 @@
 To run:
 
 ```c
-python3 Main.py Contest_code Problem 
+python3 Main.py cpp_file_name contest_code problem 
 ```
 
-Note that is necessary to change the directory on line 39 to an folder that contains a .cpp file to create and run the test cases.
+Note that is necessary to change the directory on line 40 to an folder that contains a .cpp file to create and run the test cases.
 
 
-The .cpp file name is defined as 'a.cpp' line 48.
-
-![GitHub Logo](https://raw.githubusercontent.com/jonh14lk/Cftester/master/print.png)
+![GitHub Logo](https://raw.githubusercontent.com/jonh14lk/Cftester/master/picture.png)
