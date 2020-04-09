@@ -10,15 +10,8 @@ home = expanduser('~')
 url = 'http://www.codeforces.com/contest/'
 pos = '/problem/'
 
-print('------------------')
-print('|    cftester    |')
-print('------------------')  
-print('')                                                                                                                                                                  
-print('Contest code:')
-code = input()
-print('Problem:')
-problem = input()
-
+code = sys.argv[1]
+problem = sys.argv[2]
 url = url + code + pos + problem
 req = Request(url)
 response = urlopen(req)
