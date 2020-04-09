@@ -12,6 +12,7 @@ pos = '/problem/'
 
 code = sys.argv[1]
 problem = sys.argv[2]
+
 url = url + code + pos + problem
 req = Request(url)
 response = urlopen(req)
