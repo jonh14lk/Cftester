@@ -3,7 +3,7 @@
 To run:
 
 ```c
-python3 Main.py cpp_file_name contest_code problem 
+python3 Main.py (cpp_file_name) (contest_code) (problem) 
 ```
 
 Note that is necessary to change the directory on line 46 to an folder that contains a .cpp file to create and run the test cases.
