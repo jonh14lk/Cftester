@@ -1,15 +1,21 @@
 # Cftester
 
-To run:
+To run this code, you need to clone this repository and after this, install the requirements of requirements.txt.
+
+Just run the command:
 
 ```c
-python3 Main.py (cpp_file_name) (contest_code) (problem) 
+pip install -r requirements.txt
 ```
 
-Note that is necessary to change the directory on line 46 to an folder that contains a .cpp file to create and run the test cases.
+After this, you need to change the "folderPath" in config.json file to the full path of the cloned repository folder.
 
+Finally, to run the code:
 
-Example: to run the test cases for problem [1333B](https://codeforces.com/contest/1333/problem/B) in a.cpp :
+```c
+python3 Main.py <cpp_file_name> <contest_code> <problem>
+```
 
+Example: to run the test cases for problem [1498D](https://codeforces.com/contest/1498/problem/D) in a.cpp:
 
-![GitHub Logo](https://raw.githubusercontent.com/jonh14lk/Cftester/master/printt.png)
+![](https://raw.githubusercontent.com/jonh14lk/Cftester/master/printt.png)
