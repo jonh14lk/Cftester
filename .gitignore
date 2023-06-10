@@ -1,0 +1,4 @@
+*.in
+*.cpp
+.vscode
+main

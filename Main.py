@@ -1,5 +1,5 @@
-import subprocess
 import os
+import re
 import sys
 import json
 from termcolor import colored
@@ -13,11 +13,27 @@ file = sys.argv[1]
 code = sys.argv[2]
 problem = sys.argv[3]
 
-def main():
-    url = 'http://www.codeforces.com/contest/' + code + '/problem/' + problem
-    soup = BeautifulSoup(urlopen(Request(url)).read(), 'html.parser')
-    p = soup.findAll('pre')
+def process(s : str):
+    pattern = r'<div[^>]*>'
 
+    s = re.sub(pattern, '', s)
+    s = s.replace('</div>', '\n')
+    s = s.replace('<pre>','').replace('</pre>','')
+    s = s.replace('&gt;','>')
+    s = s.replace('&lt;','<')
+    s = s.replace('&quot;','"')
+    s = s.replace('&amp;','&')
+    s = s.replace('<br />','\n')
+    s = s.replace('<br/>','\n')
+    s = s.replace('</ br>','\n')
+    s = s.replace('</br>','\n')
+    s = s.replace('<br>','\n')
+    s = s.replace('< br>','\n')
+    s = s.split('\n')
+
+    return s
+
+def main():
     with open('config.json') as f:
         jsonfile = json.load(f)
         folderPath = jsonfile['folderPath']
@@ -26,6 +42,15 @@ def main():
         waColor = jsonfile['waColor']
         outputColor = jsonfile['outputColor']
         answerColor = jsonfile['answerColor']
+        isGym =  jsonfile['isGym']
+    
+    url = 'http://www.codeforces.com/contest/' + code + '/problem/' + problem
+
+    if isGym:
+         url = 'http://www.codeforces.com/gym/' + code + '/problem/' + problem
+
+    soup = BeautifulSoup(urlopen(Request(url)).read(), 'html.parser')
+    p = soup.findAll('pre')
     
     ret = ''
     ans = ''
@@ -34,21 +59,9 @@ def main():
 
     for i in range(q):
         if (i % 2 == 0):
-            In = str(p[i])
-            In = In.replace('<pre>','').replace('</pre>','')
-            In = In.replace('&gt;','>')
-            In = In.replace('&lt;','<')
-            In = In.replace('&quot;','"')
-            In = In.replace('&amp;','&')
-            In = In.replace('<br />','\n')
-            In = In.replace('<br/>','\n')
-            In = In.replace('</ br>','\n')
-            In = In.replace('</br>','\n')
-            In = In.replace('<br>','\n')
-            In = In.replace('< br>','\n')
-            In = In.split('\n')
+            input = process(str(p[i]))
             f = open(folderPath + str(index) + '.in', 'w')
-            for j in In:
+            for j in input:
                 y = j.replace('\n', '')
                 if(y != '' and y != ' '):
                     f.write(y + '\n')
@@ -60,20 +73,9 @@ def main():
             ret = os.popen('./main <' + str(index) + '.in').read()
             print(ret)
         else:
-            Out = str(p[i])
-            Out = Out.replace('<pre>','').replace('</pre>','')
-            Out = Out.replace('&gt;','>')
-            Out = Out.replace('&lt;','<')
-            Out = Out.replace('&quot;','"')
-            Out = Out.replace('&amp;','&')
-            Out = Out.replace('<br />','\n')
-            Out = Out.replace('<br/>','\n')
-            Out = Out.replace('</ br>','\n')
-            Out = Out.replace('<br>','\n')
-            Out = Out.split('\n')
-            ans = ''
+            output = process(str(p[i]))
             print(colored('Answer:', answerColor))
-            for j in Out:
+            for j in output:
                 y = j.replace('\n' , '')
                 if(y != '' and y != ' '):
                     ans = ans + y + '\n'
@@ -85,5 +87,6 @@ def main():
                 print(colored('WRONG ANSWER', waColor))
             print()
             index = index + 1
+            ans = ''
 
 main()
